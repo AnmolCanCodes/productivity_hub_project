@@ -120,21 +120,3 @@ SELECT * FROM users;
 SELECT * FROM tasks;
 SELECT * FROM categories;
 ```
-
-## GitHub Upload Commands
-
-```bash
-git init
-git add .
-git commit -m "Initial commit"
-git branch -M main
-git remote add origin <your-github-repo-url>
-git push -u origin main
-```
-
-## Important Security Notes
-
-- Never commit `.env`.
-- Keep `.env` local only.
-- Use a strong JWT secret in production.
-- Use real PostgreSQL credentials and do not expose them in code or screenshots.
