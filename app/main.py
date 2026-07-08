@@ -1,11 +1,22 @@
+from fastapi import FastAPI
+from app.config import settings
+from app.routers import auth, tasks
+from app.database import engine, Base
+from app.routers import categories
 
-from sqlalchemy import create_engine
-from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
-DATABASE_URL = "postgresql://postgres:2211@localhost/productivity_hub"
+Base.metadata.create_all(bind=engine)
 
-engine = create_engine(DATABASE_URL)
-SessionLocal = sessionmaker(autocommit=False, autoflush=False, bind=engine)
+app = FastAPI(title=settings.APP_NAME)
 
-class Base(DeclarativeBase):
-    pass
+app.include_router(auth.router)
+app.include_router(tasks.router)
+app.include_router(categories.router)
+
+@app.get("/")
+def read_root():
+    return {"message": "Welcome to Personal Productivity Hub"}
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app, host="0.0.0.0", port=8000)
