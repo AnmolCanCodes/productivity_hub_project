@@ -1,14 +1,26 @@
 # Personal Productivity Hub
 
-A FastAPI + SQLAlchemy + PostgreSQL backend for managing users, tasks, and categories.
+Personal Productivity Hub is a backend API built with FastAPI, SQLAlchemy, and PostgreSQL to help users manage daily tasks, organize work into categories, and authenticate securely.
+
+This project is designed to serve as a clean, modular foundation for a productivity application where users can register, log in, create tasks, and organize them using categories.
+
+## Why this project exists
+
+The goal of this project is to provide a reliable backend for a productivity application with:
+
+- secure user authentication
+- task management
+- category-based organization
+- a structured, maintainable codebase
 
 ## Features
 
 - User registration and login
 - JWT-based authentication
-- Task creation and listing
-- Category CRUD endpoints
-- PostgreSQL persistence with SQLAlchemy ORM
+- Task creation and retrieval
+- Category CRUD operations
+- PostgreSQL database integration using SQLAlchemy ORM
+- Clean layered architecture with routers, services, schemas, and models
 
 ## Tech Stack
 
@@ -17,57 +29,77 @@ A FastAPI + SQLAlchemy + PostgreSQL backend for managing users, tasks, and categ
 - SQLAlchemy
 - PostgreSQL
 - Pydantic
-- Passlib + python-jose
+- Passlib
+- python-jose
+- Uvicorn
 
 ## Project Structure
 
 ```text
 app/
-  auth/
-  models/
-  routers/
-  schemas/
-  services/
-  config.py
-  database.py
-  main.py
+  auth/           # authentication helpers
+  models/         # SQLAlchemy ORM models
+  routers/        # FastAPI endpoints
+  schemas/        # request/response validation models
+  services/       # business logic
+  config.py       # environment settings
+  database.py     # database connection and session setup
+  main.py         # FastAPI application entry point
 ```
 
-## Setup
+## Prerequisites
 
-1. Create and activate a virtual environment
+Before running the project, make sure you have:
+
+- Python 3.12 or newer installed
+- PostgreSQL installed and running
+- a database created named `productivity_hub`
+
+## Setup Instructions
+
+1. Clone the repository
+
+```bash
+git clone <your-repository-url>
+cd productivity_hub_project
+```
+
+2. Create and activate a virtual environment
 
 ```bash
 python3 -m venv .venv
 source .venv/bin/activate
 ```
 
-2. Install dependencies
+3. Install dependencies
 
 ```bash
 pip install -r requirements.txt
 ```
 
-3. Create your environment file
+4. Create your environment file
 
 ```bash
 cp .env.example .env
 ```
 
-4. Update `.env` with your local PostgreSQL credentials and secret key.
 
-## Run the API
+```
+
+## Run the Application
+
+Start the server with:
 
 ```bash
 uvicorn app.main:app --reload
 ```
 
-Then open:
+Once running, you can visit:
 
-- API docs: http://localhost:8000/docs
+- API documentation: http://localhost:8000/docs
 - Root endpoint: http://localhost:8000/
 
-## Example API Requests
+## API Examples
 
 ### Register a user
 
@@ -100,13 +132,13 @@ curl http://localhost:8000/categories/
 
 ## PostgreSQL Commands
 
-Create database:
+Create the database:
 
 ```sql
 CREATE DATABASE productivity_hub;
 ```
 
-Connect:
+Connect to the database:
 
 ```bash
 psql -U postgres -d productivity_hub -h localhost
@@ -120,3 +152,5 @@ SELECT * FROM users;
 SELECT * FROM tasks;
 SELECT * FROM categories;
 ```
+
+
